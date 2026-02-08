@@ -3,14 +3,14 @@ import { getDatabase, ref, get, set, onValue, type Database } from "firebase/dat
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, type Auth } from "firebase/auth"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDsauv1hmzSyKWXvb-HH9wxIL1j4io_1hw",
-  authDomain: "link-bio-isa.firebaseapp.com",
-  databaseURL: "https://link-bio-isa-default-rtdb.firebaseio.com",
-  projectId: "link-bio-isa",
-  storageBucket: "link-bio-isa.firebasestorage.app",
-  messagingSenderId: "231773780884",
-  appId: "1:231773780884:web:54d896ace6cc6aa1a02d81",
-  measurementId: "G-9VHX6MHDBH",
+  apiKey: "AIzaSyDZ373oF_sQxP7iBRHyrlEzG5BY_eImYu8",
+  authDomain: "links-isabelle.firebaseapp.com",
+  databaseURL: "https://links-isabelle-default-rtdb.firebaseio.com",
+  projectId: "links-isabelle",
+  storageBucket: "links-isabelle.firebasestorage.app",
+  messagingSenderId: "558227177266",
+  appId: "1:558227177266:web:ac4153b44c94595603212b",
+  measurementId: "G-TT4JPSCN7Z"
 }
 
 // Initialize Firebase only once
