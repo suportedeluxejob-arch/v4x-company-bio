@@ -40,7 +40,14 @@ export async function saveSiteData(data: unknown) {
 
 // Auth operations
 export async function loginAdmin(email: string, password: string) {
-  return signInWithEmailAndPassword(auth, email, password)
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password)
+    console.log("Login successful", userCredential.user.uid)
+    return userCredential
+  } catch (error) {
+    console.error("Firebase Login Error:", error)
+    throw error
+  }
 }
 
 export async function logoutAdmin() {
