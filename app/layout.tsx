@@ -7,7 +7,7 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 
 export const metadata: Metadata = {
-  title: "lintree - Isa",
+  title: "Isabelle - Contas Oficiais",
   description: "Todos os links em um só lugar",
   icons: {
     icon: "/favicon.png",
