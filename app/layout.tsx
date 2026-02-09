@@ -7,12 +7,12 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 
 export const metadata: Metadata = {
-  title: "WG Patch",
+  title: "lintree - Isa",
   description: "Todos os links em um só lugar",
   icons: {
     icon: "/favicon.png",
   },
-    generator: '0'
+  generator: '0'
 }
 
 export const viewport: Viewport = {
