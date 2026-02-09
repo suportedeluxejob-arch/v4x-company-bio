@@ -7,7 +7,19 @@ import { use } from "react"
 
 export default function NichePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
-  const { data } = useAdmin()
+  const { data, isLoading, dataLoaded } = useAdmin()
+
+  // Wait for data to load
+  if (isLoading || !dataLoaded) {
+    return (
+      <div className="min-h-screen bg-[#050505] flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-[#d4af37]/30 border-t-[#d4af37] rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-gray-400">Carregando...</p>
+        </div>
+      </div>
+    )
+  }
 
   const card = data?.mainCards?.find((c) => c.id === id)
   const banners = data?.categoryContents?.[id] || []
@@ -15,9 +27,9 @@ export default function NichePage({ params }: { params: Promise<{ id: string }> 
 
   if (!card) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#050505]">
+      <div className="min-h-screen flex items-center justify-center bg-[#050505] text-white">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4 italic text-white">Página não encontrada</h1>
+          <h1 className="text-2xl font-bold mb-4 italic">Página não encontrada</h1>
           <Link href="/" className="text-purple-500 hover:underline">
             Voltar para Home
           </Link>

@@ -6,14 +6,15 @@ import EmpireCard from "@/components/empire-card"
 import { useEffect, useState } from "react"
 
 export default function HomePage() {
-  const { data, isLoading } = useAdmin()
+  const { data, isLoading, dataLoaded } = useAdmin()
   const [isReady, setIsReady] = useState(false)
 
   useEffect(() => {
-    if (!isLoading) {
+    // Only show content when both auth (or bypass) check is done AND data is loaded
+    if (!isLoading && dataLoaded) {
       setIsReady(true)
     }
-  }, [isLoading])
+  }, [isLoading, dataLoaded])
 
   const cards = data.mainCards
 

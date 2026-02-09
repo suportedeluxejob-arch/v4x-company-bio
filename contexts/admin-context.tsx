@@ -22,6 +22,7 @@ export interface AdminContextType {
   addBanner: (categoryId: string, banner: Omit<SiteData["categoryContents"][string][0], "id">) => void
   updateBanner: (categoryId: string, id: string, banner: Partial<SiteData["categoryContents"][string][0]>) => void
   deleteBanner: (categoryId: string, id: string) => void
+  dataLoaded: boolean
 }
 
 const AdminContext = createContext<AdminContextType | undefined>(undefined)
@@ -254,6 +255,7 @@ export function AdminProvider({ children }: { children: ReactNode }) {
         addBanner,
         updateBanner,
         deleteBanner,
+        dataLoaded,
       }}
     >
       {children}
