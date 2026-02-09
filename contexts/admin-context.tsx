@@ -35,6 +35,9 @@ export function AdminProvider({ children }: { children: ReactNode }) {
   const [dataLoaded, setDataLoaded] = useState(false)
 
   // Load local data on mount (Recovery Mode)
+  // Load local data on mount (Recovery Mode) - DISABLED TO PREVENT FLICKERING IN PRODUCTION
+  // We only want to load from Firebase in production. Local API returns stale default data.
+  /*
   useEffect(() => {
     const loadLocalData = async () => {
       try {
@@ -52,6 +55,7 @@ export function AdminProvider({ children }: { children: ReactNode }) {
     }
     loadLocalData()
   }, [])
+  */
 
   useEffect(() => {
     const unsubscribeAuth = subscribeAuthState((user: unknown) => {
@@ -86,7 +90,10 @@ export function AdminProvider({ children }: { children: ReactNode }) {
         setData(cleanData)
         setDataLoaded(true)
       } else {
-        console.warn("Received invalid or empty data from Firebase, ignoring to preserve local/default data")
+        console.warn("Received invalid or empty data from Firebase, using default data")
+        // Even if Firebase is empty (first load), we MUST set dataLoaded to true
+        // so the user sees the default state and can start editing.
+        setDataLoaded(true)
       }
     })
 
