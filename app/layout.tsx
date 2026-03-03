@@ -7,7 +7,7 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 
 export const metadata: Metadata = {
-  title: "Isabelle - Contas Oficiais",
+  title: "V4X Company",
   description: "Todos os links em um só lugar",
   icons: {
     icon: "/favicon.png",
