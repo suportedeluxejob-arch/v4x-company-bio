@@ -71,28 +71,27 @@ export function AdminProvider({ children }: { children: ReactNode }) {
     const unsubscribeData = subscribeSiteData((firebaseData: unknown) => {
       console.log("Firebase data received:", firebaseData)
 
-      // Validate data structure to avoid wiping local state with empty firebase data
-      const isValidData = firebaseData &&
-        typeof firebaseData === 'object' &&
-        'mainCards' in firebaseData &&
-        Array.isArray((firebaseData as SiteData).mainCards) &&
-        'categoryContents' in firebaseData &&
-        typeof (firebaseData as SiteData).categoryContents === 'object' &&
-        (firebaseData as SiteData).categoryContents !== null
-
-      if (isValidData) {
-        console.log("Firebase data is valid, updating state")
-        // Ensure categoryContents context is preserved or defaulted
+      // If Firebase returns null, it means the database is empty (all items deleted)
+      // We should respect this and show an empty state, NOT the default data
+      if (firebaseData) {
+        // We have data, let's make sure it has the right shape
         const cleanData = firebaseData as SiteData
-        if (!cleanData.categoryContents) {
-          cleanData.categoryContents = {}
-        }
+        // Set defaults if arrays are missing from the firebase object
+        if (!cleanData.mainCards) cleanData.mainCards = []
+        if (!cleanData.categoryContents) cleanData.categoryContents = {}
+        if (!cleanData.profile) cleanData.profile = defaultData.profile
+
         setData(cleanData)
         setDataLoaded(true)
       } else {
-        console.warn("Received invalid or empty data from Firebase, using default data")
-        // Even if Firebase is empty (first load), we MUST set dataLoaded to true
-        // so the user sees the default state and can start editing.
+        // Data is empty/null in Firebase (user deleted everything)
+        // We set empty arrays to respect the user's choice
+        console.warn("Database is empty, setting empty state")
+        setData({
+          profile: defaultData.profile, // Keep profile defaults as baseline
+          mainCards: [],
+          categoryContents: {}
+        })
         setDataLoaded(true)
       }
     })
