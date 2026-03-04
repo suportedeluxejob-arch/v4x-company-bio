@@ -59,7 +59,7 @@ export default function HomePage() {
       </main>
 
       <footer className="py-8 text-center text-[10px] text-gray-600 font-mono uppercase tracking-widest border-t border-white/5">
-        POWERED BY ISABELLE EMPIRE © 2026
+        POWERED BY V4X COMPANY © 2026 TODOS OS DIREITOS RESERVADOS
       </footer>
     </div>
   )
